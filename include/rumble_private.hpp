@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include "beatsaber-hook/shared/utils/logging.hpp"
 
 typedef struct Color32 {

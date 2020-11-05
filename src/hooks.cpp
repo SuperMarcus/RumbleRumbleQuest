@@ -16,26 +16,20 @@
 using namespace Libraries::HM::HMLib::VR;
 
 MAKE_HOOK_OFFSETLESS(NoteCutHapticEffect_HitNote, void, GlobalNamespace::NoteCutHapticEffect* self, GlobalNamespace::SaberType saberType) {
-    static HapticPresetSO* alteredPreset = nullptr;
+    static float originalStrength = self->rumblePreset->strength;
+    static float originalDuration = self->rumblePreset->duration;
+    static float originalFreq = self->rumblePreset->frequency;
+
     auto& config = getConfig();
-    auto* hapticController = self->hapticFeedbackController;
 
-    if (config.enabled && hapticController) {
-        if (!alteredPreset) {
-            alteredPreset = THROW_UNLESS(il2cpp_utils::New<HapticPresetSO*>());
-        }
-
-        if (config.noteStrength > 0 && config.noteDuration > 0) {
-            alteredPreset->strength = config.noteStrength;
-            alteredPreset->duration = config.noteDuration;
-
-            auto xrNode = GlobalNamespace::SaberTypeExtensions::Node(saberType);
-            self->hapticFeedbackController->PlayHapticFeedback(xrNode, alteredPreset);
-        }
-
-        // getLogger().debug("Altered hit haptic: strength=%f, duration=%f", config.noteStrength, config.noteDuration);
-
-        return; // Do not execute the original hitnote handler
+    if (config.enabled) {
+        self->rumblePreset->strength = config.noteStrength;
+        self->rumblePreset->duration = config.noteDuration;
+        self->rumblePreset->frequency = 1.0;
+    } else {
+        self->rumblePreset->strength = originalStrength;
+        self->rumblePreset->duration = originalDuration;
+        self->rumblePreset->frequency = originalFreq;
     }
 
     NoteCutHapticEffect_HitNote(self, saberType);
@@ -52,10 +46,13 @@ MAKE_HOOK_OFFSETLESS(ObstacleSaberSparkleEffectManager_Update, void, GlobalNames
 }
 
 MAKE_HOOK_OFFSETLESS(SaberClashEffect_LateUpdate, void, GlobalNamespace::SaberClashEffect* self) {
+    static float originalStrength = self->rumblePreset->strength;
     auto& currentConfig = getConfig();
     
     if (currentConfig.enabled) {
         self->rumblePreset->strength = currentConfig.saberStrength;
+    } else {
+        self->rumblePreset->strength = originalStrength;
     }
 
     SaberClashEffect_LateUpdate(self);
@@ -64,11 +61,14 @@ MAKE_HOOK_OFFSETLESS(SaberClashEffect_LateUpdate, void, GlobalNamespace::SaberCl
 MAKE_HOOK_OFFSETLESS(VRInputModule_HandlePointerExitAndEnter, void, VRUIControls::VRInputModule* self,
                      Il2CppObject* currentPointerData, Il2CppObject* newEnterTarget)
 {
+    static float originalStrength = self->rumblePreset->strength;
     auto& currentConfig = getConfig();
 
     if (currentConfig.enabled) {
         // Block UI feedbacks if mod settings view is presenting.
         self->rumblePreset->strength = currentConfig.uiStrength; // RRQSettingsControllerIsPresenting() ? 0.0 : currentConfig.uiStrength;
+    } else {
+        self->rumblePreset->strength = originalStrength;
     }
 
     VRInputModule_HandlePointerExitAndEnter(self, currentPointerData, newEnterTarget);

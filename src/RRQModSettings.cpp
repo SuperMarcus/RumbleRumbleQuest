@@ -22,8 +22,6 @@ using namespace VRUIControls;
 using namespace GlobalNamespace;
 using namespace Libraries::HM::HMLib::VR;
 
-#define BOUNDED(x, l, u) ((x) > (u) ? (u) : (x) < (l) ? (l) : (x))
-
 DEFINE_CLASS(RRQModSettingsViewController);
 
 static bool isPresentingModSettings = false;
@@ -41,7 +39,7 @@ void RRQModSettingsEnabledToggle(RRQModSettingsViewController* self, bool newVal
 
 void RRQModSettingsOnNoteDurationChange(RRQModSettingsViewController* self, float newValue) {
     auto& currentConfig = getConfig();
-    float boundedValue = BOUNDED(newValue, 0.0, 60.0);
+    float boundedValue = std::clamp<float>(newValue, 0.0, 60.0);
 
     if (boundedValue == newValue) {
         getLogger().debug("noteDuration=%f", newValue);
@@ -57,7 +55,7 @@ void RRQModSettingsOnNoteDurationChange(RRQModSettingsViewController* self, floa
 
 void RRQModSettingsOnNoteStrengthChange(RRQModSettingsViewController* self, float newValue) {
     auto& currentConfig = getConfig();
-    float boundedValue = BOUNDED(newValue, 0.0, 1.0);
+    float boundedValue = std::clamp<float>(newValue, 0.0, 1.0);
 
     if (boundedValue == newValue) {
         getLogger().debug("noteStrength=%f", newValue);
@@ -73,7 +71,7 @@ void RRQModSettingsOnNoteStrengthChange(RRQModSettingsViewController* self, floa
 
 void RRQModSettingsOnSaberStrengthChange(RRQModSettingsViewController* self, float newValue) {
     auto& currentConfig = getConfig();
-    float boundedValue = BOUNDED(newValue, 0.0, 1.0);
+    float boundedValue = std::clamp<float>(newValue, 0.0, 1.0);
 
     if (boundedValue == newValue) {
         getLogger().debug("saberStrength=%f", newValue);
@@ -89,7 +87,7 @@ void RRQModSettingsOnSaberStrengthChange(RRQModSettingsViewController* self, flo
 
 void RRQModSettingsOnObstacleStrengthChange(RRQModSettingsViewController* self, float newValue) {
     auto& currentConfig = getConfig();
-    float boundedValue = BOUNDED(newValue, 0.0, 1.0);
+    float boundedValue = std::clamp<float>(newValue, 0.0, 1.0);
 
     if (boundedValue == newValue) {
         getLogger().debug("wallStrength=%f", newValue);
@@ -105,7 +103,7 @@ void RRQModSettingsOnObstacleStrengthChange(RRQModSettingsViewController* self, 
 
 void RRQModSettingsOnUIStrengthChange(RRQModSettingsViewController* self, float newValue) {
     auto& currentConfig = getConfig();
-    float boundedValue = BOUNDED(newValue, 0.0, 1.0);
+    float boundedValue = std::clamp<float>(newValue, 0.0, 1.0);
 
     if (boundedValue == newValue) {
         getLogger().debug("uiStrength=%f", newValue);
