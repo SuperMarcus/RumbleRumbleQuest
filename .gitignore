@@ -6,3 +6,5 @@ obj/
 Android.mk.backup
 qpm.shared.json
 RumbleRumbleQuest.zip
+.idea
+cmake-build-debug

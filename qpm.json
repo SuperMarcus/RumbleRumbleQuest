@@ -4,20 +4,24 @@
   "info": {
     "name": "Rumble Rumble Quest",
     "id": "rumblerumblequest",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "url": null,
     "additionalData": {}
   },
   "dependencies": [
     {
       "id": "custom-types",
-      "versionRange": "^0.2.10",
+      "versionRange": "^0.4.4",
       "additionalData": {}
     },
     {
       "id": "beatsaber-hook",
-      "versionRange": "^0.8.2",
-      "additionalData": {}
+      "versionRange": "^1.0.12",
+      "additionalData": {
+        "extraFiles": [
+          "src/inline-hook"
+        ]
+      }
     },
     {
       "id": "libil2cpp",
@@ -30,8 +34,13 @@
       "additionalData": {}
     },
     {
+      "id": "codegen",
+      "versionRange": "^0.6.2",
+      "additionalData": {}
+    },
+    {
       "id": "questui",
-      "versionRange": "0.2.3",
+      "versionRange": "^0.4.3",
       "additionalData": {}
     }
   ],

@@ -1,14 +1,14 @@
 {
   "id": "rumblerumblequest",
   "name": "Rumble Rumble Quest",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "marcuszhou",
   "description": [
     "Adjust controller haptic feedback. A Quest port of the Rumble Mod from PC."
   ],
   "coverImageFilename": "cover.gif",
   "category": "Gameplay",
-  "gameVersion": "1.12.2",
+  "gameVersion": "1.13.2",
   "links": {
     "project-home": "https://github.com/SuperMarcus/RumbleRumbleQuest"
   },
@@ -17,40 +17,16 @@
     {
       "Type": "HookMod",
       "InstallAction": {
-        "InstallLibraryFile": "librumblerumblequest_1_0_0.so"
+        "InstallLibraryFile": "librumblerumblequest.so"
       },
       "UninstallAction": {
-        "RemoveLibraryFile": "librumblerumblequest_1_0_0.so"
+        "RemoveLibraryFile": "librumblerumblequest.so"
       }
     },
     {
       "type": "HookModLibrary",
       "installAction": {
-        "installLibraryFile": "libbeatsaber-hook_0_8_0.so"
-      }
-    },
-    {
-      "type": "HookModLibrary",
-      "installAction": {
-        "installLibraryFile": "libbeatsaber-hook_0_8_2.so"
-      }
-    },
-    {
-      "type": "HookModLibrary",
-      "installAction": {
-        "installLibraryFile": "libquestui.so"
-      }
-    },
-    {
-      "type": "HookModLibrary",
-      "installAction": {
-        "installLibraryFile": "libcustom-types.so"
-      }
-    },
-    {
-      "type": "HookModLibrary",
-      "installAction": {
-        "installLibraryFile": "libcodegen_0_3_5.so"
+        "installLibraryFile": "libbeatsaber-hook_1_0_12.so"
       }
     }
   ]

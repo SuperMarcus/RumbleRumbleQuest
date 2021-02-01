@@ -10,7 +10,7 @@ typedef struct Color32 {
     uint8_t a;
 } Color32;
 
-const Logger& getLogger();
+Logger& getLogger();
 
 bool RRQSettingsControllerIsPresenting();
 void RRQInstallHooks();

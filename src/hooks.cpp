@@ -75,10 +75,11 @@ MAKE_HOOK_OFFSETLESS(VRInputModule_HandlePointerExitAndEnter, void, VRUIControls
 }
 
 void RRQInstallHooks() {
-    getLogger().info("Adding hooks...");
+    auto& logger = getLogger();
+    logger.info("Adding hooks...");
 
-    INSTALL_HOOK_OFFSETLESS(NoteCutHapticEffect_HitNote, il2cpp_utils::FindMethodUnsafe("", "NoteCutHapticEffect", "HitNote", 1));
-    INSTALL_HOOK_OFFSETLESS(ObstacleSaberSparkleEffectManager_Update, il2cpp_utils::FindMethod("", "ObstacleSaberSparkleEffectManager", "Update"));
-    INSTALL_HOOK_OFFSETLESS(SaberClashEffect_LateUpdate, il2cpp_utils::FindMethod("", "SaberClashEffect", "LateUpdate"));
-    INSTALL_HOOK_OFFSETLESS(VRInputModule_HandlePointerExitAndEnter, il2cpp_utils::FindMethodUnsafe("VRUIControls", "VRInputModule", "HandlePointerExitAndEnter", 2));
+    INSTALL_HOOK_OFFSETLESS(logger, NoteCutHapticEffect_HitNote, il2cpp_utils::FindMethodUnsafe("", "NoteCutHapticEffect", "HitNote", 1));
+    INSTALL_HOOK_OFFSETLESS(logger, ObstacleSaberSparkleEffectManager_Update, il2cpp_utils::FindMethod("", "ObstacleSaberSparkleEffectManager", "Update"));
+    INSTALL_HOOK_OFFSETLESS(logger, SaberClashEffect_LateUpdate, il2cpp_utils::FindMethod("", "SaberClashEffect", "LateUpdate"));
+    INSTALL_HOOK_OFFSETLESS(logger, VRInputModule_HandlePointerExitAndEnter, il2cpp_utils::FindMethodUnsafe("VRUIControls", "VRInputModule", "HandlePointerExitAndEnter", 2));
 }

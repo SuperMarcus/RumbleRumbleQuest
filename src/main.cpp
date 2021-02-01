@@ -6,9 +6,9 @@
 
 static ModInfo modInfo;
 
-const Logger& getLogger() {
-    static const Logger logger(modInfo);
-    return logger;
+Logger& getLogger() {
+    static auto* logger = new Logger(modInfo);
+    return *logger;
 }
 
 ConfigClass& getConfig() {
@@ -21,7 +21,7 @@ extern "C" void setup(ModInfo& info) {
     info.id = ID;
     info.version = VERSION;
     modInfo = info;
-    getLogger().info("Setting up Rumble.");
+    getLogger().info("Setting up Rumble mod.");
 }
 
 extern "C" void load() {
